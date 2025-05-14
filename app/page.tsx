@@ -47,20 +47,21 @@ const Home = () => {
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
 
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=c69178b258424dad971192655251105&q=${location}&days=7&aqi=yes&alerts=yes`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=c69178b258424dad971192655251105&q=${location}&days=7&aqi=yes&alerts=yes`;
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       try {
-        const responce = await fetch(url);
-        if (!responce.ok) {
-          throw new Error();
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await responce.json();
+        const data = await response.json();
         setData(data);
         setLocation("");
         setError("");
       } catch (error) {
+        console.error('Error fetching weather data:', error);
         setError("City not found");
         setData({});
       }
