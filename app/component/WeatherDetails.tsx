@@ -69,7 +69,7 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
           <div className="bg-white/50 flex p-4 items-center justify-center gap-6 rounded-xl">
             <div className="text-2xl">
               <h3>Sunrise</h3>
-              <h3>{data.forecast.forecastday[0].astro.Sunrise}</h3>
+              <h3>{data.forecast.forecastday[0].astro.sunrise}</h3>
             </div>
             <div>
               <BsSunrise fontSize={40} />
