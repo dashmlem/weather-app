@@ -5,17 +5,19 @@ import { MdLocationOn } from "react-icons/md";
 interface CurrentProps {
   data: {
     current: {
-      icon: string;
-      text: string;
+      condition: {
+        icon: string;
+        text: string;
+      };
+      temp_f: number;
     };
-    temp_f: number;
-  };
-  location: {
-    name: string;
-    region: string;
+    location: {
+      name: string;
+      region: string;
+    };
   };
 }
-const Current = ({ data }) => {
+const Current = ({ data }: CurrentProps) => {
   const weatherIcon = data.current.condition.icon;
   const currentDate = getCurrentDate();
 

@@ -5,8 +5,45 @@ import Current from "./component/Current";
 import WeatherDetails from "./component/WeatherDetails";
 import WeekForecast from "./component/WeekForecast";
 
+interface WeatherData {
+  current: {
+    condition: {
+      icon: string;
+      text: string;
+    };
+    temp_f: number;
+    wind_mph: number;
+    humidity: number;
+    wind_dir: string;
+    pressure_mb: number;
+    feelslike_f: number;
+    vis_km: number;
+  };
+  location: {
+    name: string;
+    region: string;
+  };
+  forecast: {
+    forecastday: Array<{
+      date: string;
+      day: {
+        condition: {
+          icon: string;
+          text: string;
+        };
+        maxtemp_f: number;
+        mintemp_f: number;
+      };
+      astro: {
+        sunrise: string;
+        sunset: string;
+      };
+    }>;
+  };
+}
+
 const Home = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState<WeatherData | {}>({});
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
 
@@ -49,11 +86,11 @@ const Home = () => {
     content = (
       <>
         <div className="flex md:flex-row flex-col p-12 items-center justify-between">
-          <Current data={data} />
-          <WeekForecast data={data} />
+          <Current data={data as WeatherData} />
+          <WeekForecast data={data as WeatherData} />
         </div>
         <div>
-          <WeatherDetails data={data} />
+          <WeatherDetails data={data as WeatherData} />
         </div>
       </>
     );
